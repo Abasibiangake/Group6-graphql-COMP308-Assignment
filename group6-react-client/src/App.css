@@ -1,5 +1,30 @@
 .App {
+  padding: 20px;
   text-align: center;
+  font-family: FontAwesome, Arial, Helvetica, sans-serif;
+}
+
+.App form{
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.App card{
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.ProfileIcon{
+  height: 128px;
+  text-align: center;
+}
+
+.ProfileIconImage{
+  object-fit: none
+}
+
+.CloseButton {
+  float: right;
 }
 
 .App-logo {
@@ -7,9 +32,25 @@
   pointer-events: none;
 }
 
+.table>thead>tr>th {
+  color: #009245;
+}
+  
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+  color: #009245;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-md,
+  .container-sm {
+    max-width: unset;
   }
 }
 
