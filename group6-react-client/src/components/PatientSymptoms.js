@@ -37,9 +37,9 @@ const getPrediction = (prediction) => {
  
   switch (maxKey) {
     case 'row1':
-      return "Go to Doctor to confirm your diagnosis";
-    case 'row2':
       return "You are fine! However, Checkup is always recommended";
+    case 'row2':
+      return "Go to Doctor to confirm your diagnosis";
     default:
       return "Insufficient data to predict!";
   }
