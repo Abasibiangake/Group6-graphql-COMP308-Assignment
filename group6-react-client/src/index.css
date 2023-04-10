@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.alert-background{
+  background-image: url("./emergency.jpg") ;
+  background-size: 500px;
+  background-repeat: no-repeat;
+  right: 0;
+  background-attachment: fixed;
+  background-position: 95% 55%;
+}
+
+.motivation-background{
+  background-image: url("./motivation.jpg") ;
+  background-size: 400px;
+  background-repeat: no-repeat;
+  right: 0;
+  background-attachment: fixed;
+  background-position: 100% 100%;
+}
+
+.motivation-background-update{
+  background-position: 100% 80%;
+}
+.card-img {
+  height: 400px;
+  object-fit: cover;
+}

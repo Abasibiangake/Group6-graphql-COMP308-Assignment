@@ -30,10 +30,8 @@ const RecordType = new GraphQLObjectType({
 });
 
  // Create a query type for the record model
- const queryType = new GraphQLObjectType({
-    name: 'Query',
-    fields: function () {
-      return {
+ const recordQuery = {
+   
       records: {
         type: GraphQLList(RecordType),
         resolve: async () => {
@@ -79,14 +77,10 @@ const RecordType = new GraphQLObjectType({
           }
         }
       }
-    }
-  }
-  });
+    
+  };
 
-  const mutation = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: function () {
-      return{
+  const recordMutation ={   
         addRecord: {
         type: RecordType,
         args: {
@@ -149,8 +143,8 @@ const RecordType = new GraphQLObjectType({
           return "Record deleted successfully";
         }
       }
-    }
-    }
-  });
+  };
+    
+    
 
-module.exports = new GraphQLSchema({ query: queryType, mutation: mutation });
+module.exports = { recordQuery: recordQuery, recordMutation: recordMutation };

@@ -6,9 +6,8 @@ const configureMongoose = require('./config/mongoose');
 const configureExpress = require('./config/express');
 //
 const { graphqlHTTP } = require('express-graphql');
-var schema = require('./graphql/schemas');
-var schema2 = require('./graphql/recordSchema');
-//const configureGraphQL = require('./config/graphql');
+
+var schema = require('./graphql/indexSchema');
 var cors = require("cors");
 const bodyParser = require('body-parser');
 
@@ -26,9 +25,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 //app.use('*', cors());
 
-app.use('/graphql', graphqlHTTP( (request, response) =>  {
+app.use('/graphql', 
+graphqlHTTP( (request, response) =>  {
   return {
-    schema: schema2,
+    schema: schema,
     rootValue: global,
     graphiql: true,
     context: {

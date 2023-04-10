@@ -1,7 +1,7 @@
 // App.js
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { Modal, Navbar, Nav, Container} from 'react-bootstrap';
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment,useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -25,6 +25,17 @@ import ChangePassword from './components/ChangePassword';
 import DeleteUser from './components/DeleteUser';
 import PatientRecord from './components/PatientRecord.js';
 import AddPatientRecord from './components/AddPatientRecord.js';
+import EmergencyAlert from './components/EmergencyAlert';
+import { useAuthToken,
+  useAuthUserToken,
+  useAuthUserType,
+  useLogout} from "./components/config/auth";
+import ViewAlert from './components/ViewAlert';
+import ViewMotivationalVideo from './components/ViewMotivationalVideo';
+import ManageMotivationalVideo from './components/ManageMotivationalVideo';
+import AddMotivationalVideo from './components/AddMotivationalVideo';
+import UpdateMotivationalVideo from './components/UpdateMotivationalVideo';
+import FitnessGames from './components/FitnessGames';
 function App() {
 
   // query for checking if student is logged in
@@ -34,6 +45,7 @@ query Payload {
     username
     email
     userType
+    _id
   }
 }
 `;
@@ -53,8 +65,18 @@ mutation Logout
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [authToken] = useAuthToken();
+  const [authUserToken] = useAuthUserToken();
+  const [authType] = useAuthUserType();
   //ReactModal.setAppElement('#root');
+ 
+
+  useEffect(() => {
+    if (authToken) {
+      setCurrentUser(authUserToken);
+    }
+  }, [authToken, authUserToken]);
 
   const NurseProtectedRoute = ({ children }) => {
     if (!isNurse()) {
@@ -76,6 +98,7 @@ mutation Logout
       setUserType(data.payload.userType);
       setUsername(data.payload.username);
       setEmail(data.payload.email);
+      sessionStorage.setItem('user_id', data.payload._id);
       sessionStorage.setItem('username', data.payload.username);
     },
   });
@@ -91,14 +114,6 @@ mutation Logout
       });
   };
 
-  /*
-  useEffect(() => {
-    console.log(isLoggedIn());
-    if (isLoggedIn()) {
-      console.log('forceUpdate')
-      forceUpdate();
-    }
-    },[]);*/
 
   const isLoggedIn = () => {
     //console.log(sessionStorage.getItem('username'));
@@ -127,6 +142,7 @@ mutation Logout
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
               <Nav.Link as={Link} to="/nurses">Contact Nurses</Nav.Link>
+             
               {
                 !isLoggedIn() ?
                   <Fragment>
@@ -136,10 +152,18 @@ mutation Logout
                   :
                   <Fragment>
                     {isNurse() ?
-                      <Fragment><Nav.Link as={Link} to="/patients">Patients</Nav.Link></Fragment>
+                      <Fragment><Nav.Link as={Link} to="/patients">Patients</Nav.Link>
+                      <Nav.Link as={Link} to="/viewAlerts">View Alerts</Nav.Link>
+                      <Nav.Link as={Link} to="/ManageMotivationalVideo">Manage Motivational Video</Nav.Link>
+
+                      </Fragment>                      
                       :
-                      <Fragment></Fragment>
+                      <Fragment> <Nav.Link as={Link} to="/emergencyAlert">Emergency Alert</Nav.Link>
+                      <Nav.Link as={Link} to="/ViewMotivationalVideo">View Motivational Videos</Nav.Link>
+                      <Nav.Link as={Link} to="/FitnessPage">Fitness Apps</Nav.Link>
+                      </Fragment>
                     }
+                   
                     <div className={`nav-link`} style={{ cursor: "pointer" }} onClick={() => setIsOpen(true)}> Account Settings </div>
                     <Modal show={isOpen} onHide={() => setIsOpen(false)}>
                       <Modal.Header closeButton>
@@ -173,7 +197,13 @@ mutation Logout
           <Route path="register" element={<Register />} />
           <Route path="record/:patientId" element= {<PatientRecord/>}  />
           <Route path="create/record/:patientIdnew" element= {<AddPatientRecord/>}  />
-          
+          <Route path="emergencyAlert" element={<EmergencyAlert />} />
+          <Route path="viewAlerts" element={<ViewAlert />} />
+          <Route path="ViewMotivationalVideo" element={<ViewMotivationalVideo />} />
+          <Route path="ManageMotivationalVideo" element={<ManageMotivationalVideo />} />
+          <Route path="AddMotivationalVideo" element={<AddMotivationalVideo />} />
+          <Route path="UpdateMotivationalVideo/:id" element={<UpdateMotivationalVideo />} />
+          <Route path="FitnessPage" element={<FitnessGames />} />
         </Routes>
       </div>
     </Router>
