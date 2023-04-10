@@ -52,6 +52,10 @@ module.exports = function() {
 	// Set the application view engine and 'views' folder
 	app.set('views', './app/views');
 	app.set('view engine', 'ejs');
+
+	// Load the routing files
+	require("../routes/index.server.routes.js")(app);
+
 	
 	// Configure static file serving
 	app.use(express.static('./public'));
