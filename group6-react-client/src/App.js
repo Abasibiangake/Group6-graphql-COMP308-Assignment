@@ -36,6 +36,7 @@ import ManageMotivationalVideo from './components/ManageMotivationalVideo';
 import AddMotivationalVideo from './components/AddMotivationalVideo';
 import UpdateMotivationalVideo from './components/UpdateMotivationalVideo';
 import FitnessGames from './components/FitnessGames';
+import PatientSymptoms from './components/PatientSymptoms';
 function App() {
 
   // query for checking if student is logged in
@@ -161,6 +162,7 @@ mutation Logout
                       <Fragment> <Nav.Link as={Link} to="/emergencyAlert">Emergency Alert</Nav.Link>
                       <Nav.Link as={Link} to="/ViewMotivationalVideo">View Motivational Videos</Nav.Link>
                       <Nav.Link as={Link} to="/FitnessPage">Fitness Apps</Nav.Link>
+                      <Nav.Link as={Link} to="/patientSymptoms">Symptoms</Nav.Link>
                       </Fragment>
                     }
                    
@@ -204,6 +206,7 @@ mutation Logout
           <Route path="AddMotivationalVideo" element={<AddMotivationalVideo />} />
           <Route path="UpdateMotivationalVideo/:id" element={<UpdateMotivationalVideo />} />
           <Route path="FitnessPage" element={<FitnessGames />} />
+          <Route path="patientSymptoms" element={<PatientSymptoms />} />
         </Routes>
       </div>
     </Router>
