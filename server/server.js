@@ -7,6 +7,8 @@ const configureExpress = require('./config/express');
 //
 const { graphqlHTTP } = require('express-graphql');
 var schema = require('./graphql/schemas');
+var schema2 = require('./graphql/recordSchema');
+//const configureGraphQL = require('./config/graphql');
 var cors = require("cors");
 const bodyParser = require('body-parser');
 
@@ -26,7 +28,7 @@ app.use(cors(corsOptions));
 
 app.use('/graphql', graphqlHTTP( (request, response) =>  {
   return {
-    schema: schema,
+    schema: schema2,
     rootValue: global,
     graphiql: true,
     context: {

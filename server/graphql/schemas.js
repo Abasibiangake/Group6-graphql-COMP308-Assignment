@@ -23,6 +23,7 @@ const jwtExpirySeconds = 3600;
 const UserType = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
+        _id: { type: GraphQLID},
         username: { type: GraphQLString },
         firstName: { type: GraphQLString },
         lastName: { type: GraphQLString },
@@ -37,6 +38,7 @@ const UserType = new GraphQLObjectType({
 const PayloadType = new GraphQLObjectType({
     name: 'Payload',
     fields: () => ({
+        id: { type: GraphQLID},
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         userType: { type: GraphQLString }
@@ -109,6 +111,22 @@ const query = new GraphQLObjectType({
                     return patients;
                 }
             },
+            patient: {
+                type: UserType,
+                args: {
+                    id: {
+                        name: 'id',
+                        type: GraphQLID
+                    }
+                },
+                resolve: async (parent, args) => {
+                    const patient = await UserModel.findById(args.id);
+                    if (!patient){
+                        throw new Error('Cannot find patient');
+                    }
+                    return patient;
+                }
+            },
             payload: {
                 type: PayloadType,
                 resolve: async (parent, args, context) => {
@@ -175,6 +193,7 @@ const mutation = new GraphQLObjectType({
                             // and which expires 300 seconds after issue
                             const token = jwt.sign(
                                 {
+                                    id: userInfo._id,
                                     username: userInfo.username,
                                     email: userInfo.email,
                                     userType: userInfo.userType
@@ -189,6 +208,7 @@ const mutation = new GraphQLObjectType({
                             context.res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000, httpOnly: true });
 
                             const payload = {
+                                id: userInfo._id,
                                 username: userInfo.username,
                                 email: userInfo.email,
                                 userType: userInfo.userType

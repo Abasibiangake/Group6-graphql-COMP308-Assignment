@@ -23,6 +23,7 @@ import Patients from './components/Patients';
 import UserProfile from './components/UserProfile';
 import ChangePassword from './components/ChangePassword';
 import DeleteUser from './components/DeleteUser';
+import PatientRecord from './components/PatientRecord.js';
 
 function App() {
 
@@ -170,6 +171,7 @@ mutation Logout
           <Route path="patients" element={<NurseProtectedRoute><Patients /></NurseProtectedRoute>} />
           <Route path="login" element={<RedirectHomeRoute><Login /></RedirectHomeRoute>} />
           <Route path="register" element={<Register />} />
+          <Route path="record/:patientId" element= {<PatientRecord/>}  />
         </Routes>
       </div>
     </Router>
