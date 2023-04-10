@@ -42,7 +42,11 @@ const PatientRecord = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-
+    
+    const addRecord = (id) => {
+        console.log('the id of the patient is:', id);
+         navigate('/create/record/' + id);
+     }
 
     return (
 
@@ -81,6 +85,8 @@ const PatientRecord = () => {
                             ))}
                         </tbody>
                     </Table>
+                    <Button type="button" variant="primary" onClick={() => { addRecord (patientId)}}>ADD RECORD</Button>&nbsp;
+
                 </div>
             }
         </div>
