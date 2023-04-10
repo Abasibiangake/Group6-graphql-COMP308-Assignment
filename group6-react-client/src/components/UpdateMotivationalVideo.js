@@ -83,7 +83,7 @@ const UpdateMotivationalVideo = () => {
                       <Form.Control type="text" name="videoUrl" placeholder="Video URL" value={data.videoUrl}  onChange={handleInputChange} required />
                     </Form.Group>
                     <div className="mb-3">
-                      <Button type="submit" className="btn btn-success btn-lg me-3">
+                      <Button type="submit" className="btn btn-success me-3">
                         Update Video
                       </Button>
                     </div>

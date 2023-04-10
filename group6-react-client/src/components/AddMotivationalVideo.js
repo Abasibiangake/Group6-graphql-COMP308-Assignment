@@ -54,9 +54,13 @@ function AddMotivationalVideo() {
         navigate("/ManageMotivationalVideo");
       };
     return (
-        <div>
-            <h1>Manage Motivational Video</h1>
+      <div className="container motivation-background motivation-background-update">
+      <div className="row justify-content-md-center ">
+        <div className="col-md-8 order-md-1 py-5">
+
+            <h2>Manage Motivational Video</h2>
             {!successful && (
+              
             <Form onSubmit={saveVideo} className="needs-validation" noValidate>
                   <div className="row" >
                     <Form.Group className="mb-3" controlId="title">
@@ -74,15 +78,14 @@ function AddMotivationalVideo() {
                       <Form.Control type="text" name="videoUrl" placeholder="Video URL" value={currentVideo.videoUrl}  onChange={handleInputChange} required />
                     </Form.Group>
                     <div className="mb-3">
-                      <Button type="submit" className="btn btn-success btn-lg me-3">
+                      <Button type="submit" className="btn btn-success me-3">
                         Add Video
                       </Button>
-                    </div>
-                    <div className="mb-3">
-                      <Button type="submit" className="btn btn-success btn-lg me-3" onClick={()=>{manageMotivationalVideo()}}>
+                      <Button type="submit" className="btn btn-success me-3" onClick={()=>{manageMotivationalVideo()}}>
                         Cancel
                       </Button>
                     </div>
+                    
                   </div>
                 </Form>
                 )}
@@ -106,7 +109,7 @@ function AddMotivationalVideo() {
                 
                 )}
         </div>
-        
+        </div></div>
     )
 }
 export default AddMotivationalVideo;

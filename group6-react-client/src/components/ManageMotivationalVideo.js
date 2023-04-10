@@ -22,13 +22,17 @@ const DELETE_MOTIVATIONAL_VIDEO = gql`
 `;
 
 function ManageMotivationalVideo() {
-  const { loading, error, data } = useQuery(GET_MOTIVATIONAL_VIDEO,{
+  const { loading, error, data ,refetch} = useQuery(GET_MOTIVATIONAL_VIDEO,{
     fetchPolicy:"network-only",
       onCompleted: (data) => {
         console.log(data.motivationalVideos);
       },
   });
-  const [deleteMotivationalVideo] = useMutation(DELETE_MOTIVATIONAL_VIDEO);
+  const [deleteMotivationalVideo] = useMutation(DELETE_MOTIVATIONAL_VIDEO,{
+    onCompleted: (data) => {
+      refetch();
+    }
+  });
   let navigate = useNavigate();
 
   const handleDelete = (id) => {
