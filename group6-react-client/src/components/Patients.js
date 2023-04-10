@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const GET_PATIENTS = gql`
 {
     patients{
+        _id
         fullName
         email
     }
@@ -27,6 +28,11 @@ const Patients = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :</p>;
 
+    const showRecord = (id) => {
+       console.log('the id of the patient is:', id);
+        navigate('/record/' + id);
+    }
+
     return (
 
         <div className='App'>
@@ -40,6 +46,8 @@ const Patients = () => {
                                 <th>#</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
+                                <th>ID</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +56,8 @@ const Patients = () => {
                                     <td>{index + 1}</td>
                                     <td>{patient.fullName}</td>
                                     <td>{patient.email}</td>
+                                    <td>{patient._id}</td>
+                                    <Button type="button" variant="primary" onClick={() => { showRecord(patient._id) }}>RECORD</Button>&nbsp;
                                 </tr>
                             ))}
                         </tbody>

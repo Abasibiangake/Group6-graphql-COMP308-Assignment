@@ -23,7 +23,8 @@ import Patients from './components/Patients';
 import UserProfile from './components/UserProfile';
 import ChangePassword from './components/ChangePassword';
 import DeleteUser from './components/DeleteUser';
-
+import PatientRecord from './components/PatientRecord.js';
+import AddPatientRecord from './components/AddPatientRecord.js';
 function App() {
 
   // query for checking if student is logged in
@@ -170,6 +171,9 @@ mutation Logout
           <Route path="patients" element={<NurseProtectedRoute><Patients /></NurseProtectedRoute>} />
           <Route path="login" element={<RedirectHomeRoute><Login /></RedirectHomeRoute>} />
           <Route path="register" element={<Register />} />
+          <Route path="record/:patientId" element= {<PatientRecord/>}  />
+          <Route path="create/record/:patientIdnew" element= {<AddPatientRecord/>}  />
+          
         </Routes>
       </div>
     </Router>
