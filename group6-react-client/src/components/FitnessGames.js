@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import zwift from '../Zwift.jpg';
-import fitXR from '../FitXR.avif';
-import justDance from '../JustDanceNowLogo.jpeg';
+import zwift from '../gamesLogo/Zwift.jpg';
+import fitXR from '..//gamesLogo/FitXR.avif';
+import justDance from '../gamesLogo/JustDanceNowLogo.jpeg';
 const games = [
   {
     id: 1,
@@ -36,7 +36,9 @@ const FitnessGames = () => {
 
   return (
     <div className="container">
-      <h1>Gaming Apps to Consider</h1>
+    <div className="row justify-content-md-center ">
+      <div className="col-md-8 order-md-1 py-5">
+      <h2 className="mb-3">Top Fitness Gaming Apps</h2>
       <Row>
         {games.map((game) => (
           <Col key={game.id} md={4}>
@@ -45,14 +47,16 @@ const FitnessGames = () => {
               <Card.Body>
                 <Card.Title>{game.name}</Card.Title>
                 <Card.Text>{game.description}</Card.Text>
-                <Button variant="primary" onClick={() => handleInstall(game)}>
-                  Install
+                <Button className="btn btn-success me-3" variant="primary" onClick={() => handleInstall(game)}>
+                 Learn More
                 </Button>
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
+    </div>
+    </div>
     </div>
   );
 };
