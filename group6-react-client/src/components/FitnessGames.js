@@ -7,7 +7,7 @@ const games = [
   {
     id: 1,
     name: 'Zwift',
-    description: 'TOP TRAINING FROM THE COMFORT OF HOME',
+    description: 'Top training from the comfort of home',
     imageUrl: zwift,
     url:'https://us.zwift.com/'
   },
@@ -48,7 +48,7 @@ const FitnessGames = () => {
                 <Card.Title>{game.name}</Card.Title>
                 <Card.Text>{game.description}</Card.Text>
                 <Button className="btn btn-success me-3" variant="primary" onClick={() => handleInstall(game)}>
-                 Learn More
+                 Play
                 </Button>
               </Card.Body>
             </Card>
