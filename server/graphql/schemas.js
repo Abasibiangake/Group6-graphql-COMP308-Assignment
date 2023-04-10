@@ -2,7 +2,6 @@
 const graphql = require('graphql');
 
 const {
-  GraphQLSchema,
   GraphQLObjectType,
   GraphQLList,
   GraphQLNonNull,
@@ -41,7 +40,9 @@ const PayloadType = new GraphQLObjectType({
         id: { type: GraphQLID},
         username: { type: GraphQLString },
         email: { type: GraphQLString },
-        userType: { type: GraphQLString }
+        userType: { type: GraphQLString },
+        token: { type: GraphQLString },
+        _id:{type: GraphQLString }
     })
 });
 
@@ -70,10 +71,8 @@ const GetPayloadFromCookies = async (context) => {
 }
 
 // create a GraphQL query type
-const query = new GraphQLObjectType({
-    name: 'Query',
-    fields: () => {
-        return {
+const UserQuery = {
+  
             users: {
                 type: new GraphQLList(UserType),
                 resolve: async () => {
@@ -138,15 +137,11 @@ const query = new GraphQLObjectType({
                     }
                 }
             }
-        }
-    }
-});
+     
+};
 
 // create a GraphQL mutation type
-const mutation = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: () => {
-        return {
+const UserMutation  = {
             register: {
                 type: UserType,
                 args: {
@@ -196,7 +191,8 @@ const mutation = new GraphQLObjectType({
                                     id: userInfo._id,
                                     username: userInfo.username,
                                     email: userInfo.email,
-                                    userType: userInfo.userType
+                                    userType: userInfo.userType,
+                                    _id: userInfo._id
                                 },
                                 JWT_SECRET,
                                 { algorithm: 'HS256', expiresIn: jwtExpirySeconds }
@@ -206,13 +202,15 @@ const mutation = new GraphQLObjectType({
                             // set the cookie as the token string, with a similar max age as the token
                             // here, the max age is in milliseconds
                             context.res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000, httpOnly: true });
-
                             const payload = {
                                 id: userInfo._id,
                                 username: userInfo.username,
                                 email: userInfo.email,
-                                userType: userInfo.userType
+                                userType: userInfo.userType,
+                                token: token,
+                                _id: userInfo._id
                             }
+                            console.log(payload);
                             return payload;
                         }
                     }
@@ -321,8 +319,8 @@ const mutation = new GraphQLObjectType({
                     }
                 }
             }
-        }
-    }
-});
+        
+    
+};
 
-module.exports = new GraphQLSchema({ query: query, mutation: mutation });
+module.exports = { userquery: UserQuery, usermutation: UserMutation};

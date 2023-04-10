@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { gql, useMutation } from '@apollo/client';
 import login from '../login.png';
-
+import {
+  useAuthToken,
+  useAuthUserToken,
+  useAuthUserType,
+} from "./config/auth";
 // mutation for user login
 const LOGIN_USER = gql`
 mutation Login( $email: String!, $password: String! ) {
@@ -12,6 +16,8 @@ mutation Login( $email: String!, $password: String! ) {
       username
       email
       userType
+      token
+      _id
   }
 }
 `;
@@ -21,15 +27,22 @@ function Login() {
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
-
+  const [_, setAuthToken, removeAuthtoken] = useAuthToken();
+  const [__, setAuthUserToken, removeAuthUsertoken] = useAuthUserToken();
+  const [___, setAuthUserType, removeAuthUserType] = useAuthUserType();
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
       const { data } = await loginUser({
         variables: { email, password },
       });
+      console.log('Logged in as:>>>>>>>>>>>', data);
       console.log('Logged in as:', data.login);
       sessionStorage.setItem("username", data.login.username);
+
+      setAuthToken(data.login.token);
+      setAuthUserToken(data.login.username);
+      setAuthUserType(data.login.userType);
       window.location.href = '/home';
     } catch (error) {
       console.error('Login error:', error);

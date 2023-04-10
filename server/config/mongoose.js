@@ -16,7 +16,8 @@ module.exports = function () {
 
 	// Load the models
 	require('../models/User');
-
+	require('../models/motivationalVideo.server.model');
+	require('../models/alert.server.model');
 	// Return the Mongoose connection instance
 	return db;
 };
