@@ -50,7 +50,6 @@ const AddPatientRecord = () => {
     if (error) return `Submission error! ${error.message}`;
   
     const saveRecord = (e) => {
-        console.log('I came here:',record)
         setShowLoading(true);
         e.preventDefault();
         addRecord({variables:{patientId: record.patientId,
@@ -64,19 +63,16 @@ const AddPatientRecord = () => {
         //
         setRecord({...record, [e.target.name]: ''})
         console.log('nav to record/:',record)
-        console.log('nav to record/:',record.patientId)
         navigate('/record/' + patientIdnew)
 
     };
     
     const onChange = (e) => {
         e.persist();   
-        console.log('I came here too:',record)
         const value = e.target.name === 'bodyTemperature' || e.target.name === 'bloodPressure' || e.target.name === 'heartRate' || e.target.name === 'respiratoryRate'
             ? parseInt(e.target.value)
             : e.target.value;
         setRecord({...record, [e.target.name]: value});
-        console.log('I came here update:',record)
 
       }
 
