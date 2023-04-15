@@ -55,7 +55,7 @@ const PatientRecord = () => {
         <div className='App'>
             <h2>Patient Record</h2>
             {data && data.recordsByPatientId.length === 0 ?
-                <p>No patients record found</p> :
+                <p>No patients record found for patient id: "{patientId}" </p> :
                 <div>
                     <Table striped>
                         <thead>
