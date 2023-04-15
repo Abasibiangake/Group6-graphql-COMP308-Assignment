@@ -57,7 +57,7 @@ const Patients = () => {
                                     <td>{patient.fullName}</td>
                                     <td>{patient.email}</td>
                                     <td>{patient._id}</td>
-                                    <Button type="button" variant="primary" onClick={() => { showRecord(patient._id) }}>RECORD</Button>&nbsp;
+                                    <Button style={{color: "blue"}}type="button" variant="primary" onClick={() => { showRecord(patient._id) }}>RECORD</Button>&nbsp;
                                 </tr>
                             ))}
                         </tbody>
