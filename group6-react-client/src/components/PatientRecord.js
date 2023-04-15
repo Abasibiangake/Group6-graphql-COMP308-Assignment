@@ -35,10 +35,12 @@ const PatientRecord = () => {
     });
 
     useEffect(() => { 
-        if(data){
-            console.log(data);
+        refetch();
+        if(data ){
+            console.log("this is the data I am passing", data);
         }
-    },[data]);
+        
+    },[data, refetch]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -85,11 +87,14 @@ const PatientRecord = () => {
                             ))}
                         </tbody>
                     </Table>
-                    <Button type="button" variant="primary" onClick={() => { addRecord (patientId)}}>ADD RECORD</Button>&nbsp;
+                    {/* <Button type="button" variant="primary" onClick={() => { addRecord (patientId)}}>ADD RECORD</Button>&nbsp; */}
 
                 </div>
             }
+            <Button type="button" variant="primary" onClick={() => { addRecord (patientId)}}>ADD RECORD</Button>&nbsp;
+
         </div>
+        
     );
 }
 
