@@ -51,8 +51,16 @@ const RecordType = new GraphQLObjectType({
         resolve: async (root, args) => {
           try {
             const recordInfo = await RecordModel.find({ patientId: args.patientId }).exec();
-            if (!recordInfo || recordInfo.length === 0) {
-              throw new Error(`Record with patient id ${args.patientId} not found`);
+            // if (!recordInfo || recordInfo.length === 0) {
+            //   throw new Error(`Record with patient id ${args.patientId} not found`);
+            // }
+            if (!recordInfo) {
+              const recordModel = new RecordModel(args.patientId);
+              const newRecord = recordModel.save();
+              if (!newRecord) {
+                throw new Error('Error not new Record');
+              }
+              return newRecord
             }
             return recordInfo;
           } catch (err) {
