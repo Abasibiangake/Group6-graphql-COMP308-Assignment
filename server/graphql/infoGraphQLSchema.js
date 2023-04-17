@@ -29,7 +29,65 @@ const InfoType = new GraphQLObjectType({
     })
 });
 
-const info ={   
+const infoQuery = {
+   
+  infos: {
+    type: GraphQLList(InfoType),
+    resolve: async () => {
+      try {
+        const infos = await InfoModel.find().exec();
+        return infos;
+      } catch (err) {
+        throw new Error('Error fetching records:', err);
+      }
+    }
+  },
+  infosByPatientId: {
+    type: new GraphQLList(InfoType),
+    args: {
+      patientId: {name: 'patientId', type: GraphQLNonNull(GraphQLString) }
+    },
+    resolve: async (root, args) => {
+      try {
+        const info = await InfoModel.find({ patientId: args.patientId }).exec();
+        // if (!recordInfo || recordInfo.length === 0) {
+        //   throw new Error(`Record with patient id ${args.patientId} not found`);
+        // }
+        if (!info) {
+          const infoModel = new InfoModel(args.patientId);
+          const newInfo = infoModel.save();
+          if (!newInfo) {
+            throw new Error('Error not new Record');
+          }
+          return newInfo
+        }
+        return info;
+      } catch (err) {
+        throw new Error(`Error fetching record with patient id ${args.patientId}:`, err);
+      }
+    }
+  },
+  info: {
+    type: InfoType,
+    args: {
+      id: {name: '_id', type: GraphQLNonNull(GraphQLString) }
+    },
+    resolve: async (root, args) => {
+      try {
+        const info = await InfoModel.findById(args.id).exec();
+        if (!info) {
+          throw new Error(`Record with id ${args.id} not found`);
+        }
+        return info;
+      } catch (err) {
+        throw new Error(`Error fetching record with id ${args.id}:`, err);
+      }
+    }
+  }
+
+};
+
+const infoMutation ={   
         addInfo: {
         type: InfoType,
         args: {
@@ -69,4 +127,4 @@ const info ={
     
     
 
-module.exports = { info: info };
+module.exports = { infoQuery: infoQuery, infoMutation: infoMutation };

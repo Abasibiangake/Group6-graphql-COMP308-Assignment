@@ -84,77 +84,76 @@ const AddHealthInfo= () => {
               <Col xs={4.5}>
                 <br></br><br></br>
                 <h2>DAILY HEALTH INFO</h2>
-                <p style={{color: 'red'}}>Enter vital signs: body temperature, heart rate, blood pressure, or respiratory rate!</p>
                 <Form onSubmit={saveInfo}>
                   <Form.Group>
+                    <Form.Label>Patient Id:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="patientId"
                       name="patientId"
                       type="text"
                       defaultValue={info.patientId}
-                      onChange={onChange} 
-                      placeholder="&#xf007;; patientId" />
+                      onChange={onChange} />
                   </Form.Group>
                   <Form.Group>
+                    <Form.Label>Date:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="date"
                       name="date"
                       type="text"
                       defaultValue={info.date}
-                      onChange={onChange} 
-                      placeholder="&#xf073; date" />
+                      onChange={onChange} />
                   </Form.Group>
                   <Form.Group>
+                    <Form.Label>Weight:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="weight"
                       name="weight"
                       type="number"
                       defaultValue={info.weight}
-                      onChange={onChange} 
-                      placeholder="&#xf004; weight" />
+                      onChange={onChange} />
                   </Form.Group>
                   <Form.Group>
+                    <Form.Label>Temperature:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="temperature"
                       type='number'
                       name="temperature"
                       defaultValue={info.temperature}
-                      onChange={onChange} 
-                      placeholder="&#xf182; bodyTemperature" />
+                      onChange={onChange} />
                   </Form.Group>
                   <Form.Group>
+                  <Form.Label>Blood Pressure:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="bloodPressure"
                       name="bloodPressure"
                       type="number"
                       defaultValue={info.bloodPressure}
-                      onChange={onChange} 
-                      placeholder="&#xf043; bloodPressure" />
+                      onChange={onChange} />
                   </Form.Group>
                   <Form.Group>
+                  <Form.Label>Pulse Rate:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="pulseRate"
                       name="pulseRate"
                       type="number"
                       defaultValue={info.pulseRate}
-                      onChange={onChange} 
-                      placeholder="&#xf004; heartRate" />
+                      onChange={onChange} />
                   </Form.Group>
                   <Form.Group>
+                  <Form.Label>Respiratory Rate:</Form.Label>
                     <Form.Control
                       className="mb-3"
                       id="respiratoryRate"
                       name="respiratoryRate"
                       type="number"
                       defaultValue={info.respiratoryRate}
-                      onChange={onChange} 
-                      placeholder="&#xf080; respiratoryRate" />
+                      onChange={onChange} />
                   </Form.Group>
                   {loading ? <p style={{ color: 'blue' }}>Submitting</p> : <div></div>}
                   {error ? <p style={{ color: 'red' }}>{error.message}</p> : <div></div>}

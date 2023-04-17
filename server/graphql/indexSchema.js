@@ -6,6 +6,7 @@ var {userquery, usermutation} = require("./schemas");
 var {alertquery, alertmutation} = require("./alertGraphQLSchema");
 const { motivationalVideoQuery , motivationalVideoMutation} = require("./motivationalGraphQLSchema");
 const {recordQuery, recordMutation} = require("./recordSchema");
+const {infoQuery, infoMutation} = require("./infoGraphQLSchema");
 
 const RootQuery  = new GraphQLObjectType({
     name: "RootQuery",
@@ -14,7 +15,8 @@ const RootQuery  = new GraphQLObjectType({
         ...userquery,
         ...alertquery,
         ...motivationalVideoQuery ,
-        ...recordQuery      
+        ...recordQuery,
+        ...infoQuery
       };
     },
   });
@@ -26,7 +28,8 @@ const RootMutation = new GraphQLObjectType({
         ...usermutation,
         ...alertmutation,
         ...motivationalVideoMutation,
-        ...recordMutation   
+        ...recordMutation,
+        ...infoMutation
       };
     },
   });
