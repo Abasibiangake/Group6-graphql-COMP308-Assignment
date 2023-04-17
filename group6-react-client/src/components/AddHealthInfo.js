@@ -49,7 +49,7 @@ const AddHealthInfo= () => {
     const saveInfo = (e) => {
         setShowLoading(true);
         e.preventDefault();
-        addRecord({variables:{patientId: info.patientId,
+        addInfo({variables:{patientId: info.patientId,
             date: info.date,
             pulseRate: info.pulseRate,
             bloodPressure: info.bloodPressure,
@@ -59,7 +59,7 @@ const AddHealthInfo= () => {
         });
         //
         setInfo({...info, [e.target.name]: ''})
-        navigate('/record/' + patientIdnew)
+        navigate('/')
 
     };
     
@@ -81,18 +81,9 @@ const AddHealthInfo= () => {
         } 
           <Container fluid>
             <Row>
-              <Col>
-                <Image
-                  src={patient}
-                  width="100%"
-                  height="100%"
-                  alt="Nurse Icon"
-                  fluid
-                  rounded="true" />
-              </Col>
               <Col xs={4.5}>
                 <br></br><br></br>
-                <h2>NEW RECORD</h2>
+                <h2>DAILY HEALTH INFO</h2>
                 <p style={{color: 'red'}}>Enter vital signs: body temperature, heart rate, blood pressure, or respiratory rate!</p>
                 <Form onSubmit={saveInfo}>
                   <Form.Group>
@@ -161,7 +152,7 @@ const AddHealthInfo= () => {
                       id="respiratoryRate"
                       name="respiratoryRate"
                       type="number"
-                      defaultValue={record.respiratoryRate}
+                      defaultValue={info.respiratoryRate}
                       onChange={onChange} 
                       placeholder="&#xf080; respiratoryRate" />
                   </Form.Group>
