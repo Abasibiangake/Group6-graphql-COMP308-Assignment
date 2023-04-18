@@ -203,7 +203,7 @@ mutation Logout
           <Route path="login" element={<RedirectHomeRoute><Login /></RedirectHomeRoute>} />
           <Route path="register" element={<Register />} />
           <Route path="record/:patientId" element= {<PatientRecord/>}  />
-          <Route path="create/record/:patientIdnew" element= {<AddPatientRecord/>}  />
+          <Route path="create/record/:patientIdnew" element= {<AddPatientRecord nurseId={data} />}  />
           <Route path="emergencyAlert" element={<EmergencyAlert />} />
           <Route path="viewAlerts" element={<ViewAlert />} />
           <Route path="ViewMotivationalVideo" element={<ViewMotivationalVideo />} />
