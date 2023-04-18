@@ -43,7 +43,7 @@ function AddPatientRecord (props){
     let {patientIdnew} = useParams();
     console.log('this is the patient id:', patientIdnew);
 
-    const [addRecord, { data, loading, error }] = useMutation(ADD_PATIENT_RECORD);
+    const [addRecord, { data, loading, error, refetch }] = useMutation(ADD_PATIENT_RECORD);
     const [record, setRecord] = React.useState({ patientId: '', nurseId: '', date: '',
      bodyTemperature: '', bloodPressure: '', heartRate: '', respiratoryRate: '' });
     const [showLoading, setShowLoading] = useState(false);
@@ -51,6 +51,9 @@ function AddPatientRecord (props){
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
   
+    useEffect(() => {       
+        refetch();
+    });
     const saveRecord = (e) => {
         setShowLoading(true);
         e.preventDefault();
