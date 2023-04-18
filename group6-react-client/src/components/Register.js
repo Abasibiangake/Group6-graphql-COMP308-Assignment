@@ -122,6 +122,7 @@ const RegisterUser = () => {
                                     ref={node => { password = node; }}
                                     placeholder="&#xF023; password" />
                             </Form.Group>
+                            
                             <Form.Group>
                                 <Form.Label> User Type:</Form.Label>
                                 {['radio'].map((type) => (
@@ -155,7 +156,15 @@ const RegisterUser = () => {
                             </Form.Group>
                             {loading ? <p style={{ color: 'blue' }}>Submitting</p> : <div></div>}
                             {error ? <p style={{ color: 'red' }}>{error.message}</p> : <div></div>}
-                            <Button size="sm" variant="success" type="submit">&#xF234; Register </Button>
+
+                            <div className="d-flex justify-content-center App">
+                                <Button
+                                    variant="success"
+                                    className="btn btn-success mx-auto"
+                                    type="submit">
+                                    &#xF234; Register
+                                </Button>
+                            </div>
 
                         </form>
                     </Col>

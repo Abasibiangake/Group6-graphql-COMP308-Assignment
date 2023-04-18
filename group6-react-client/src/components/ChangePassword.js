@@ -7,11 +7,9 @@ import { gql, useMutation } from '@apollo/client';
 // mutation for user login
 const CHANGE_USER_PASSWORD = gql`
 mutation ChangePassword(
-  $email: String!,
   $oldPassword: String!,
   $newPassword: String!) {
   changeUserPassword(
-    email: $email,
     oldPassword: $oldPassword,
     newPassword: $newPassword      
   )
@@ -21,7 +19,6 @@ mutation ChangePassword(
 // Login function component
 function Login() {
   const [changeUserPassword, { data, loading, error }] = useMutation(CHANGE_USER_PASSWORD);
-  let [email, setEmail] = useState('');
   let [oldPassword, setOldPassword] = useState('');
   let [newPassword, setNewPassword] = useState('');
 
@@ -29,7 +26,7 @@ function Login() {
     event.preventDefault();
     try {
       const { data } = await changeUserPassword({
-        variables: { email, oldPassword, newPassword },
+        variables: { oldPassword, newPassword },
       });
       console.log('Changed user password for:', data.changeUserPassword);
     } catch (error) {
@@ -40,15 +37,6 @@ function Login() {
   return (
     <div className="App">
       <Form onSubmit={handleChangeUserPassword}>
-        <Form.Group>
-          <Form.Control
-            className="mb-3"
-            id="email"
-            type="email"
-            required
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="&#xF0E0; email" />
-        </Form.Group>
         <Form.Group>
           <Form.Control
             className="mb-3"

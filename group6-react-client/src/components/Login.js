@@ -10,8 +10,8 @@ import {
 } from "./config/auth";
 // mutation for user login
 const LOGIN_USER = gql`
-mutation Login( $email: String!, $password: String! ) {
-	login( email: $email, password: $password)
+mutation Login( $emailOrUsername: String!, $password: String! ) {
+	login( emailOrUsername: $emailOrUsername, password: $password)
   {
       username
       email
@@ -25,7 +25,7 @@ mutation Login( $email: String!, $password: String! ) {
 // Login function component
 function Login() {
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
-  let [email, setEmail] = useState('');
+  let [emailOrUsername, setEmailOrUsername] = useState('');
   let [password, setPassword] = useState('');
   const [_, setAuthToken, removeAuthtoken] = useAuthToken();
   const [__, setAuthUserToken, removeAuthUsertoken] = useAuthUserToken();
@@ -34,7 +34,9 @@ function Login() {
     event.preventDefault();
     try {
       const { data } = await loginUser({
-        variables: { email, password },
+        variables: { 
+          emailOrUsername, 
+          password },
       });
       console.log('Logged in as:>>>>>>>>>>>', data);
       console.log('Logged in as:', data.login);
@@ -68,10 +70,9 @@ function Login() {
               <Form.Group>
                 <Form.Control
                   className="mb-3"
-                  id="email"
-                  type="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="&#xF0E0; email" />
+                  id="emailOrUsername"
+                  onChange={(event) => setEmailOrUsername(event.target.value)}
+                  placeholder="&#xF0E0; email or username" />
               </Form.Group>
               <Form.Group>
                 <Form.Control
@@ -83,7 +84,16 @@ function Login() {
               </Form.Group>
               {loading ? <p style={{ color: 'blue' }}>Submitting</p> : <div></div>}
               {error ? <p style={{ color: 'red' }}>{error.message}</p> : <div></div>}
-              <Button size="sm" variant="success" type="submit" >&#xF090; Login</Button>
+
+              <div className="d-flex justify-content-center App">
+                <Button
+                  variant="success"
+                  className="btn btn-success mx-auto"
+                  type="submit">
+                  &#xF090; Login
+                </Button>
+              </div>
+
             </Form>
           </Col>
         </Row>

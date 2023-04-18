@@ -164,11 +164,11 @@ const UserMutation  = {
             login: {
                 type: PayloadType,
                 args: {
-                    email: { type: new GraphQLNonNull(GraphQLString) },
+                    emailOrUsername: { type: new GraphQLNonNull(GraphQLString) },
                     password: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 resolve: async (parent, args, context) => {
-                    const userInfo = await UserModel.findOne({ email: args.email }).exec()
+                    const userInfo = await UserModel.findOne({ $or:[ {email: args.emailOrUsername}, {username: args.emailOrUsername} ] }).exec()
                     if (!userInfo) {
                         throw new Error('Error finding user')
                     }
@@ -219,7 +219,6 @@ const UserMutation  = {
             changeUserPassword: {
                 type: GraphQLString,
                 args: {
-                    email: { type: new GraphQLNonNull(GraphQLString) },
                     oldPassword: { type: new GraphQLNonNull(GraphQLString) },
                     newPassword: { type: new GraphQLNonNull(GraphQLString) }
                 },
@@ -228,7 +227,8 @@ const UserMutation  = {
                         throw new Error('New password cannot be the same as old password')
                     }
                     else {
-                        const userInfo = await UserModel.findOne({ email: args.email }).exec()
+                        const payload = await GetPayloadFromCookies(context);
+                        const userInfo = await UserModel.findById(payload._id).exec();
                         if (!userInfo) {
                             throw new Error('User not found')
                         }
