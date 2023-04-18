@@ -35,6 +35,16 @@ code {
 .motivation-background-update{
   background-position: 100% 80%;
 }
+
+.info-background{
+  background-image: url("./info.png") ;
+  background-size: 200px;
+  background-repeat: no-repeat;
+  right: 0;
+  background-position: 70% 100%;
+  height: calc(100vh - 56px);
+}
+
 .card-img {
   height: 288px;
   object-fit: cover;
