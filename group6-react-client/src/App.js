@@ -39,6 +39,7 @@ import FitnessGames from './components/FitnessGames';
 import PatientSymptoms from './components/PatientSymptoms';
 import AddHealthInfo from './components/AddHealthInfo';
 import PatientHealthInfo from './components/PatientsHealthInfo';
+import CovidCheckIn from './components/CovidCheckIn';
 
 function App() {
 
@@ -159,13 +160,13 @@ mutation Logout
                       <Fragment><Nav.Link as={Link} to="/patients">Patients</Nav.Link>
                       <Nav.Link as={Link} to="/viewAlerts">View Alerts</Nav.Link>
                       <Nav.Link as={Link} to="/ManageMotivationalVideo">Manage Motivational Video</Nav.Link>
-
+                      <Nav.Link as={Link} to="/patientSymptoms">Symptoms</Nav.Link>
                       </Fragment>                      
                       :
                       <Fragment> <Nav.Link as={Link} to="/emergencyAlert">Emergency Alert</Nav.Link>
                       <Nav.Link as={Link} to="/ViewMotivationalVideo">View Motivational Videos</Nav.Link>
                       <Nav.Link as={Link} to="/FitnessPage">Fitness Apps</Nav.Link>
-                      <Nav.Link as={Link} to="/patientSymptoms">Symptoms</Nav.Link>
+                      <Nav.Link as={Link} to="/covidCheckIn">Covid-19</Nav.Link>
                       <Nav.Link as={Link} to={"/healthInfo/" + sessionStorage.getItem('user_id')}>Daily Health Info</Nav.Link>
                       </Fragment>
                     }
@@ -213,6 +214,7 @@ mutation Logout
           <Route path="patientSymptoms" element={<PatientSymptoms />} />
           <Route path="healthInfo/:patientId" element={<PatientHealthInfo />} />
           <Route path="addInfo/:patientId" element={<AddHealthInfo />} />
+          <Route path="covidCheckIn" element={<CovidCheckIn />} />
         </Routes>
       </div>
     </Router>

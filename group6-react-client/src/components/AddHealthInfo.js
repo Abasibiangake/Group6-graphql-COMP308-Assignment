@@ -11,7 +11,7 @@ import Spinner from 'react-bootstrap/Spinner';
 const ADD_HEALTH_INFO = gql`
 mutation addInfo( $patientId:String!,
 $date:String!, $pulseRate:Int!, 
-$bloodPressure:Int!, $weight:Int!, 
+$bloodPressure:Int!, $weight:Int!,  
 $temperature: Int!, $respiratoryRate:Int!)
 {
     addInfo( patientId: $patientId
