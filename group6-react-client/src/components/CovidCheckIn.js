@@ -27,7 +27,6 @@ const CovidCheckIn = () => {
   };
 
   const handleMinorChange = (e) => {
-    e.preventDefault()
     const value = (e.target.checked ? 1 : -1)
     let count = minor;
     setMinor(count + value);
@@ -35,7 +34,6 @@ const CovidCheckIn = () => {
   }
 
   const handleSevereChange = (e) => {
-    e.preventDefault()
     const value = (e.target.checked ? 1 : -1)
     let count = severe;
     setSevere(count + value);
