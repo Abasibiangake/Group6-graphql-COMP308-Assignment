@@ -35,15 +35,17 @@ $respiratoryRate:Int!)
     }
 `;
 
-const AddPatientRecord = () => {
+function AddPatientRecord (props){
     let navigate = useNavigate();
-
+    // read the info from props, coming from the ancestor component
+    const { nurseId } = props;
+    console.log('this is the nurse id:', nurseId.payload._id)
     let {patientIdnew} = useParams();
     console.log('this is the patient id:', patientIdnew);
 
     const [addRecord, { data, loading, error }] = useMutation(ADD_PATIENT_RECORD);
     const [record, setRecord] = React.useState({ patientId: '', nurseId: '', date: '',
-     bodyTemperature: 0, bloodPressure: 0, heartRate: 0, respiratoryRate: 0 });
+     bodyTemperature: '', bloodPressure: '', heartRate: '', respiratoryRate: '' });
     const [showLoading, setShowLoading] = useState(false);
 
     if (loading) return 'Submitting...';
@@ -53,7 +55,7 @@ const AddPatientRecord = () => {
         setShowLoading(true);
         e.preventDefault();
         addRecord({variables:{patientId: record.patientId,
-            nurseId: record.nurseId,
+            nurseId: nurseId.payload._id,
             date: record.date,
             bodyTemperature:record.bodyTemperature,
             bloodPressure: record.bloodPressure,
@@ -107,18 +109,9 @@ const AddPatientRecord = () => {
                       type="text"
                       defaultValue={record.patientId}
                       onChange={onChange} 
-                      placeholder="&#xf007;; patientId" />
+                      placeholder="&#xf007; Patient Id" />
                   </Form.Group>
-                  <Form.Group>
-                    <Form.Control
-                      className="mb-3"
-                      id="nurseId"
-                      name="nurseId"
-                      type="text"
-                      defaultValue={record.nurseId}
-                      onChange={onChange} 
-                      placeholder="&#xf007; nurseId" />
-                  </Form.Group><Form.Group>
+                    <Form.Group>
                     <Form.Control
                       className="mb-3"
                       id="date"
@@ -126,7 +119,7 @@ const AddPatientRecord = () => {
                       type="text"
                       defaultValue={record.date}
                       onChange={onChange} 
-                      placeholder="&#xf073; date" />
+                      placeholder="&#xf073; Date" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Control
@@ -136,7 +129,7 @@ const AddPatientRecord = () => {
                       name="bodyTemperature"
                       defaultValue={record.bodyTemperature}
                       onChange={onChange} 
-                      placeholder="&#xf182; bodyTemperature" />
+                      placeholder="&#xf182; Body Temperature" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Control
@@ -146,7 +139,7 @@ const AddPatientRecord = () => {
                       type="number"
                       defaultValue={record.bloodPressure}
                       onChange={onChange} 
-                      placeholder="&#xf043; bloodPressure" />
+                      placeholder="&#xf043; Blood Pressure" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Control
@@ -156,7 +149,7 @@ const AddPatientRecord = () => {
                       type="number"
                       defaultValue={record.heartRate}
                       onChange={onChange} 
-                      placeholder="&#xf004; heartRate" />
+                      placeholder="&#xf004; Heart Rate" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Control
@@ -166,7 +159,7 @@ const AddPatientRecord = () => {
                       type="number"
                       defaultValue={record.respiratoryRate}
                       onChange={onChange} 
-                      placeholder="&#xf080; respiratoryRate" />
+                      placeholder="&#xf080; Respiratory Rate" />
                   </Form.Group>
                   {loading ? <p style={{ color: 'blue' }}>Submitting</p> : <div></div>}
                   {error ? <p style={{ color: 'red' }}>{error.message}</p> : <div></div>}
