@@ -35,7 +35,7 @@ $temperature: Int!, $respiratoryRate:Int!)
 const AddHealthInfo = () => {
   let navigate = useNavigate();
 
-  let { patientIdnew } = useParams();
+  let { patientId } = useParams();
 
   const [authUserToken] = useAuthUserToken();
   const [authType] = useAuthUserType();
@@ -61,7 +61,7 @@ const AddHealthInfo = () => {
     try {
       const { data } = await addInfo({
         variables: {
-          patientId: content,
+          patientId: patientId,
           date: info.date,
           pulseRate: info.pulseRate,
           bloodPressure: info.bloodPressure,
@@ -72,7 +72,7 @@ const AddHealthInfo = () => {
       });
       //
       setInfo({ ...info, [e.target.name]: '' })
-      navigate('/')
+      navigate('/healthInfo/' + patientId)
     }
     catch (error) {
       setShowLoading(false);
@@ -90,7 +90,7 @@ const AddHealthInfo = () => {
 
   useEffect(() => {
     if (isNurse()) {
-      setContent(patientIdnew);
+      setContent(patientId);
     }
     else {
       setContent(sessionStorage.getItem("user_id"));
@@ -122,7 +122,7 @@ const AddHealthInfo = () => {
                     id="patientId"
                     name="patientId"
                     type="text"
-                    defaultValue={content}
+                    defaultValue={patientId}
                     placeholder='Enter patient id'
                     onChange={onChange} />
                 </Col>

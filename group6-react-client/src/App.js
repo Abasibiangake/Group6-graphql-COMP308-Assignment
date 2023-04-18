@@ -38,6 +38,7 @@ import UpdateMotivationalVideo from './components/UpdateMotivationalVideo';
 import FitnessGames from './components/FitnessGames';
 import PatientSymptoms from './components/PatientSymptoms';
 import AddHealthInfo from './components/AddHealthInfo';
+import PatientHealthInfo from './components/PatientsHealthInfo';
 
 function App() {
 
@@ -165,7 +166,7 @@ mutation Logout
                       <Nav.Link as={Link} to="/ViewMotivationalVideo">View Motivational Videos</Nav.Link>
                       <Nav.Link as={Link} to="/FitnessPage">Fitness Apps</Nav.Link>
                       <Nav.Link as={Link} to="/patientSymptoms">Symptoms</Nav.Link>
-                      <Nav.Link as={Link} to="/healthInfo">Daily Health Info</Nav.Link>
+                      <Nav.Link as={Link} to={"/healthInfo/" + sessionStorage.getItem('user_id')}>Daily Health Info</Nav.Link>
                       </Fragment>
                     }
                    
@@ -210,7 +211,8 @@ mutation Logout
           <Route path="UpdateMotivationalVideo/:id" element={<UpdateMotivationalVideo />} />
           <Route path="FitnessPage" element={<FitnessGames />} />
           <Route path="patientSymptoms" element={<PatientSymptoms />} />
-          <Route path="healthInfo" element={<AddHealthInfo />} />
+          <Route path="healthInfo/:patientId" element={<PatientHealthInfo />} />
+          <Route path="addInfo/:patientId" element={<AddHealthInfo />} />
         </Routes>
       </div>
     </Router>

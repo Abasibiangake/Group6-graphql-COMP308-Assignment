@@ -33,6 +33,11 @@ const Patients = () => {
         navigate('/record/' + id);
     }
 
+    const showInfo = (id) => {
+        console.log('the id of the patient is:', id);
+         navigate('/healthInfo/' + id);
+     }
+
     return (
 
         <div className='App'>
@@ -57,6 +62,7 @@ const Patients = () => {
                                     <td>{patient.fullName}</td>
                                     <td>{patient.email}</td>
                                     <td>{patient._id}</td>
+                                    <Button style={{color: "blue"}}type="button" variant="primary" onClick={() => { showInfo(patient._id) }}>HEALTH INFO</Button>&nbsp;
                                     <Button style={{color: "blue"}}type="button" variant="primary" onClick={() => { showRecord(patient._id) }}>RECORD</Button>&nbsp;
                                 </tr>
                             ))}
