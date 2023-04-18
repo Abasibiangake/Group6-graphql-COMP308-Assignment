@@ -8,7 +8,7 @@ const CovidCheckIn = () => {
 
   const [minor, setMinor] = useState(1);
   const [severe, setSevere] = useState(1);
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState();
   
   const handleSubmit = () => {
     if (minor <= 3)
@@ -46,7 +46,7 @@ const CovidCheckIn = () => {
         case 1:
             return "You probably an infection! It is recommended to get some rest or consult a doctor if the symptoms persist."
         case 2:
-            return "You should immediately consult a doctor!"
+            return "It is highly recommend that you take a test!"
         default:
             return null
         }
@@ -57,8 +57,8 @@ const CovidCheckIn = () => {
       <Container>
         <h2>COVID-19 Self Check In</h2>
         <Form>
-          <h5>Which of the following Symptoms do u have</h5>          
-          <p> Choose any or all that are new, worsening and not related to other known causes or conditions.</p>
+          <h5>Which of the following Symptoms do u have?</h5>          
+          <p> Choose all that are new, worsening and not related to other known causes or conditions.</p>
 
           <Row>
             <Col>
@@ -156,8 +156,7 @@ const CovidCheckIn = () => {
 
         </Form>
           <div>
-            <h2>Assessment Result:</h2>
-            <p> {showResult(num)}</p>
+            <h3 style={{color: "green"}}>{showResult(num)}</h3>
           </div>        
       </Container>
     </div>
