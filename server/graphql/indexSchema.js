@@ -2,7 +2,7 @@ var GraphQLSchema = require("graphql").GraphQLSchema;
 var GraphQLObjectType = require("graphql").GraphQLObjectType;
 
 
-var {userquery, usermutation} = require("./schemas");
+var {userquery, usermutation} = require("./userSchema");
 var {alertquery, alertmutation} = require("./alertGraphQLSchema");
 const { motivationalVideoQuery , motivationalVideoMutation} = require("./motivationalGraphQLSchema");
 const {recordQuery, recordMutation} = require("./recordSchema");
