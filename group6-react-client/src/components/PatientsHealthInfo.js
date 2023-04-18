@@ -63,7 +63,7 @@ const PatientHealthInfo = () => {
                                 <th>Date</th>                                
                                 <th>Pulse Rate</th>
                                 <th>Blood Pressure</th>
-                                <th>Wight</th>
+                                <th>Weight</th>
                                 <th>Temperature</th>
                                 <th>Respiratory Rate</th>
 
