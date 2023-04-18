@@ -7,7 +7,7 @@ const games = [
   {
     id: 1,
     name: 'Zwift',
-    description: 'Top training from the comfort of home',
+    description: 'Workout anytime, ride with friends \& discover training plans for everyone.',
     imageUrl: zwift,
     url:'https://us.zwift.com/'
   },
