@@ -48,12 +48,11 @@ function AddPatientRecord (props){
      bodyTemperature: '', bloodPressure: '', heartRate: '', respiratoryRate: '' });
     const [showLoading, setShowLoading] = useState(false);
 
+  
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
   
-    useEffect(() => {       
-        refetch();
-    });
+    
     const saveRecord = (e) => {
         setShowLoading(true);
         e.preventDefault();
