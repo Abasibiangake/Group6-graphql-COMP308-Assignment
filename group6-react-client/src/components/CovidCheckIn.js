@@ -57,7 +57,7 @@ const CovidCheckIn = () => {
       <Container>
         <h2>COVID-19 Self Check In</h2>
         <Form>
-          <h5>Which of the following Symptoms do u have?</h5>          
+          <h5>Which of the following symptoms do you have?</h5>          
           <p> Choose all that are new, worsening and not related to other known causes or conditions.</p>
 
           <Row>
