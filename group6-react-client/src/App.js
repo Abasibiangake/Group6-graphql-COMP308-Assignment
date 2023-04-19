@@ -181,8 +181,13 @@ mutation Logout
                         <UserProfile username={username} email={email} userType={userType} />
                         <h5>Change Password</h5>
                         <ChangePassword />
-                        <h5>Delete Account</h5>
-                        <DeleteUser />
+                        {isNurse() ?
+                          <Fragment>
+                            <h5>Delete Account</h5>
+                            <DeleteUser />
+                          </Fragment>
+                          : <div></div>
+                        }
                       </Modal.Body>
                       <Modal.Footer></Modal.Footer>
                     </Modal>
