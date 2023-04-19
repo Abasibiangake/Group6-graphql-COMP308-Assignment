@@ -105,7 +105,7 @@ exports.trainAndPredictWithParam = function (req, res) {
     const startTime = Date.now();
     //train the model using fit method
     await model.fit(trainingData, outputData, {
-      epochs: 50, //number of iterations
+      epochs: 200, //number of iterations
       callbacks: {
         onEpochEnd: async (epoch, log) => {
           console.log(`Epoch ${epoch}: loss = ${log.loss}`);
